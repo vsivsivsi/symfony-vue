@@ -12,18 +12,6 @@ services:
 
   shop-php:
     container_name: shop-php
-    # Ключевое слово "build" позволяет задать
-    # путь к файлу Dockerfile, который нужно использовать для создания образа,
-    # который позволит запустить сервис.
-
-    build:
-      context: ./docker/dev/php
-    volumes:
-      - ./:/var/www
-      - ./docker/dev/php/php.ini:/usr/local/etc/php/php.ini
-
-  shop-php-fpm:
-    container_name: shop-php-fpm
     build:
       context: ./docker/dev/php-fpm
 
@@ -43,7 +31,7 @@ services:
       - ./docker/dev/nginx/conf.d/:/etc/nginx/conf.d
       - ./docker/logs:/var/log
     depends_on:
-      - shop-php-fpm
+      - shop-php
 
     # Если мы хотим обратиться к серверу с локальногонашего компьютера (находясь за пределами контейнера),
     # мы должны организовать перенаправление этого порта на порт компьютера.
