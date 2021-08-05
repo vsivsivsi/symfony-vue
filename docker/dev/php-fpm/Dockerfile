@@ -6,7 +6,7 @@ RUN apt-get update \
     && docker-php-ext-install -j$(nproc) intl opcache pdo pdo_mysql \
     && pecl install apcu \
     && docker-php-ext-enable apcu \
-    && docker-php-ext-enable sodium \
+#    && docker-php-ext-enable sodium \
     && docker-php-ext-configure zip \
     && docker-php-ext-install zip \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -19,7 +19,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
-RUN git config --global user.email "couchjanus@gmail.com" && \ 
+RUN git config --global user.email "couchjanus@gmail.com" && \
     git config --global user.name "couchjanus"
 
 EXPOSE 9000
