@@ -2,7 +2,7 @@
 FROM php:8.0-fpm
 
 RUN apt-get update \
-    && apt-get install -y zlib1g-dev g++ git libicu-dev zip libzip-dev zip libssl-dev libxml2-dev libpq-dev \
+    && DEBIAN_FRONTEND=noninteractive && apt-get install -y zlib1g-dev g++ git libicu-dev zip libzip-dev zip libssl-dev libxml2-dev libpq-dev \
     && docker-php-ext-install -j$(nproc) intl opcache pdo pdo_mysql \
     && pecl install apcu \
     && docker-php-ext-enable apcu \
@@ -21,5 +21,8 @@ RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
 RUN git config --global user.email "couchjanus@gmail.com" && \
     git config --global user.name "couchjanus"
+RUN useradd -rm -d /home/www -s /bin/bash -g root -G sudo -u 1000 www
+USER www
+
 
 EXPOSE 9000
