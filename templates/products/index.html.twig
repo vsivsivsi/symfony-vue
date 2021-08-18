@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductsController!{% endblock %}
+
+{% block javascripts %}
+    {#{{ encore_entry_script_tags('app') }}#}
+    {#            <link rel="stylesheet" href="{{ asset('build/app.js') }}"#}
+    {{ encore_entry_script_tags('products') }}
+{% endblock %}
+
+{% block body %}
+    <div id="app"></div>
+{% endblock %}
